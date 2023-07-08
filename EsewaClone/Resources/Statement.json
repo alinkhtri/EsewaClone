@@ -1,0 +1,64 @@
+{
+    "data": [
+        {
+            "icon": "building.columns",
+            "message": "Money Transfered to SIDDHARTHA BANK LTD.",
+            "datetime": "2023-06-25 10:30:00",
+            "balance": 1234.56
+        },
+        {
+            "icon": "building.columns",
+            "message": "Money Transfered from SIDDHARTHA BANK LTD.",
+            "datetime": "2023-06-26 15:45:00",
+            "balance": 7890.12
+        },
+        {
+            "icon": "building.columns",
+            "message": "Money Transfered to SIDDHARTHA BANK LTD.",
+            "datetime": "2023-06-27 09:15:00",
+            "balance": 3456.78
+        },
+        {
+            "icon": "building.columns",
+            "message": "Money Transfered to SIDDHARTHA BANK LTD.",
+            "datetime": "2023-06-28 12:00:00",
+            "balance": 9876.54
+        },
+        {
+            "icon": "building.columns",
+            "message": "Money Transfered from SIDDHARTHA BANK LTD.",
+            "datetime": "2023-06-29 17:30:00",
+            "balance": 2345.67
+        },
+        {
+            "icon": "building.columns",
+            "message": "Money Transfered from SIDDHARTHA BANK LTD.",
+            "datetime": "2023-06-30 08:45:00",
+            "balance": 8765.43
+        },
+        {
+            "icon": "building.columns",
+            "message": "Money Transfered to SIDDHARTHA BANK LTD.",
+            "datetime": "2023-07-01 14:20:00",
+            "balance": 4567.89
+        },
+        {
+            "icon": "building.columns",
+            "message": "Money Transfered from SIDDHARTHA BANK LTD.",
+            "datetime": "2023-07-02 11:10:00",
+            "balance": 7654.32
+        },
+        {
+            "icon": "building.columns",
+            "message": "Money Transfered from SIDDHARTHA BANK LTD.",
+            "datetime": "2023-07-03 16:05:00",
+            "balance": 5432.10
+        },
+        {
+            "icon": "building.columns",
+            "message": "Money Transfered from SIDDHARTHA BANK LTD.",
+            "datetime": "2023-07-04 13:25:00",
+            "balance": 1010.10
+        }
+    ]
+}

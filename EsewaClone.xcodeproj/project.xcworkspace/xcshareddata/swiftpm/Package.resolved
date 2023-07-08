@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "jdstatusbarnotification",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/calimarkus/JDStatusBarNotification.git",
+      "state" : {
+        "revision" : "c2357555debf11ac4d1130a2d9293f37e7058438",
+        "version" : "2.0.8"
+      }
+    }
+  ],
+  "version" : 2
+}
