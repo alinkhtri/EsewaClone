@@ -6,14 +6,22 @@
 //
 
 import UIKit
+import Combine
 
 class HomeViewController: UIViewController {
     
+    var loggedInuser: UserModel?
+    private var isLoggedIn: Bool = false {
+        didSet {
+            updateLoggedInNavigationbar()
+            configureLeftBarItem()
+        }
+    }
     
     private var balance : Int = 10000
     private var reward : Int = 19
     
-    private var loginViewModel = LoginViewModel()
+    var homeViewModel = HomeViewModel()
     
     let options = [("Topup", "iphone"), ("Electricity", "lightbulb"), ("Khanepani", "drop"), ("eSewa Care", "bolt.heart"), ("Request Money", "indianrupeesign"), ("Internet", "wifi.router"),
                    ("Airlines", "airplane"), ("International Airlines", "globe"), ("Hotels", "building.2"), ("Govt. Payment", "building"), ("Cable Car", "cablecar"), ("Sahakari Deposit", "building.columns"),
@@ -21,7 +29,7 @@ class HomeViewController: UIViewController {
                    ("Movies", "play.rectangle"), ("Voting & Events", "menucard"), ("Online Payment", "cart"), ("Antivirus", "shield"), ("Community Electricity", "bolt.batteryblock")]
     
     private var isToggled: Bool = false
-
+    
     
     // MARK: - UI Components
     let scrollView: UIScrollView = {
@@ -38,7 +46,41 @@ class HomeViewController: UIViewController {
         return view
     }()
     
+    let userImageView: UIImageView = {
+       let image = UIImageView()
+        image.image = UIImage(systemName: "person.circle.fill")
+        image.contentMode = .scaleAspectFit
+        image.tintColor = UIColor.white
+        image.backgroundColor = .white
+        image.layer.cornerRadius = 15
+        image.frame =  CGRect(x: 0, y: 0, width: 30, height: 30)
+        return image
+    }()
+
+
+    // Create and configure the label
+    let userLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Login/Register"
+        label.font = UIFont.preferredFont(forTextStyle: .headline)
+        label.textColor = .white
+        label.frame = CGRect(x: 40, y: -3, width: 120, height: 40)
+        label.numberOfLines = 1
+        return label
+    }()
+
+    
     // MARK: - Life Cycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.setupViewModel()
+        homeViewModel.retrieveTokenAndDecode()
+
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -54,15 +96,39 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.tintColor = UIColor.white
         
         configureNavigationBar()
+
         configureScrollView()
+
     }
+    
+    func configureLeftBarItem() {
+        // Create a custom view button for the left bar button item
+        let customButton = UIButton(type: .custom)
+        customButton.frame = CGRect(x: 0, y: 0, width: 150, height: 40)
+        
+        if isLoggedIn {
+            customButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        } else {
+            customButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        }
+        
+
+        // Add the image view and label to the custom button
+        customButton.addSubview(userImageView)
+        customButton.addSubview(userLabel)
+
+        // Add the custom button as the left bar button item
+        let leftBarButton = UIBarButtonItem(customView: customButton)
+        navigationItem.leftBarButtonItem = leftBarButton
+
+
+
+    }
+    
     
     func configureNavigationBar() {
         // Configure the navigation bar
-        
-        // Add left bar button item
-        let leftBarButton = UIBarButtonItem(image: UIImage(systemName: "circle.hexagongrid"), style: .plain, target: self, action: #selector(leftBarButtonTapped))
-        navigationItem.leftBarButtonItem = leftBarButton
+        configureLeftBarItem()
         
         // Add right bar button items
         let rightBarButton1 = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(rightBarButton1Tapped))
@@ -234,7 +300,7 @@ class HomeViewController: UIViewController {
         
         // Embed the card view into the scroll view
         scrollView.addSubview(cardView)
-
+        
     }
     
     func createButton(title: String?, subTitle: String?, imageName: String) -> UIButton {
@@ -280,15 +346,31 @@ class HomeViewController: UIViewController {
         return button
     }
     
+    func fetchUser() {
+        homeViewModel.retrieveTokenAndDecode()
+    }
     
     
     
-    @objc func leftBarButtonTapped() {
+    
+    @objc func loginButtonTapped() {
         let loginVC = LoginViewController()
         let navController = UINavigationController(rootViewController: loginVC)
         navController.modalPresentationStyle = .pageSheet
+        
+        loginVC.dismissCompletion = { [weak self] in
+            self?.fetchUser()
+        }
+        
         present(navController, animated: true, completion: nil)
     }
+    
+    @objc func profileButtonTapped() {
+        let profileViewController = ProfileViewController(user: loggedInuser!)
+        profileViewController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(profileViewController, animated: true)
+    }
+
     
     @objc func rightBarButton1Tapped() {
         // Handle right bar button item 1 tap
@@ -347,5 +429,37 @@ extension HomeViewController: UICollectionViewDataSource {
 }
 
 extension HomeViewController {
-
+    func setupViewModel() {
+        homeViewModel.homeEventHandler = { [weak self] event in
+            DispatchQueue.main.async {
+                self?.handleEvent(event)
+            }
+        }
+    }
+    
+    func updateLoggedInNavigationbar() {
+        self.userImageView.setImage(with: loggedInuser?.image ?? "https://robohash.org/quiaharumsapiente.png" )
+        self.userLabel.text = "Alin"
+    }
+    
+    func updateLoggedOutNavigationbar() {
+        self.userImageView.image = UIImage(systemName: "person")
+        userImageView.tintColor = UIColor(named: "EAccent")
+        self.userLabel.text = "Login/Register"
+    }
+    
+    private func handleEvent(_ event: HomeViewModel.HomeEvent) {
+        switch event {
+        case .success(let user):
+            print(user)
+            self.isLoggedIn = true
+            self.loggedInuser = user
+            self.updateLoggedInNavigationbar()
+            print(isLoggedIn)
+        case .error(let error):
+            self.isLoggedIn = false
+            self.updateLoggedOutNavigationbar()
+            print(error)
+        }
+    }
 }

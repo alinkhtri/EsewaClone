@@ -15,6 +15,8 @@ struct UserModel: Codable {
     let lastName: String
     let gender: String
     let image: String
-    let token: String
+    let token: String?
+    let iat: Int?
+    let exp: Int?
 }
 

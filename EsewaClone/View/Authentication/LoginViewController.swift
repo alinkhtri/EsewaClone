@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import Combine
 import JDStatusBarNotification
 
 class LoginViewController: UIViewController {
     
+    var dismissCompletion: (() -> Void)?
     
-    private var viewModel = LoginViewModel()
+    var viewModel = LoginViewModel()
+    var homeViewModel = HomeViewModel()
     
     // UI elements
     let headingImageView: UIImageView = {
@@ -117,7 +120,7 @@ class LoginViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
         
-        self.observeEvent()
+        self.setupViewModel()
         self.setupNavBar()
         self.setupUI()
     }
@@ -152,6 +155,7 @@ class LoginViewController: UIViewController {
                 self.showToastAlert(text: "Username or Password is required")
                 return
             }
+            
             
             let loginRequest = LoginRequest(username: username, password: password)
             self.viewModel.loginUser(parameter: loginRequest)
@@ -230,19 +234,19 @@ class LoginViewController: UIViewController {
         
     }
     
-    func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            completion?()
-        }
-        alertController.addAction(okAction)
-        
-        // Present the alert
-        if let viewController = UIApplication.shared.keyWindow?.rootViewController {
-            viewController.present(alertController, animated: true, completion: nil)
-        }
-    }
-
+//    func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+//        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+//            completion?()
+//        }
+//        alertController.addAction(okAction)
+//
+//        // Present the alert
+//        if let viewController = UIApplication.shared.keyWindow?.rootViewController {
+//            viewController.present(alertController, animated: true, completion: nil)
+//        }
+//    }
+    
     
     @objc func forgotButtonTapped() {
         print("Forgot")
@@ -260,7 +264,10 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func closeView() {
-        self.dismiss(animated: true, completion: nil)
+
+        dismiss(animated: true) {
+                self.dismissCompletion?()
+            }
     }
     
 }
@@ -285,30 +292,37 @@ extension LoginViewController {
         NotificationPresenter.shared().present(text: text ?? "Unknown error occured", dismissAfterDelay: 3, customStyle: "toast")
     }
     
-    func observeEvent() {
+    func setupViewModel() {
         viewModel.eventHandler = { [weak self] event in
-            guard let self else { return }
-            
-            switch event {
-            case .loading:
-                print("Loading...")
-                break
-            case .stopLoading:
-                print("Stop Loading....")
-                break
-            case .loggedInUser(let user):
-                print(user)
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true)
-                }
-            case .error(let error):
-                DispatchQueue.main.async {
-                    self.showToastAlert(text: "Invalid Login Credentials")
-                }
-                print(error)
+            DispatchQueue.main.async {
+                self?.handleEvent(event)
             }
         }
     }
     
-    
+    private func handleEvent(_ event: LoginViewModel.Event) {
+        switch event {
+        case .loading:
+            // Handle loading state
+            print("Loading...")
+            break
+        case .stopLoading:
+            // Handle stop loading state
+            print("Stop Loading....")
+            break
+        case .loggedInUser(let user):
+            // Handle logged in user
+            DispatchQueue.main.async { [weak self] in
+                self?.closeView()
+               }
+            break
+        case .error(let error):
+            // Handle error
+            DispatchQueue.main.async {
+                self.showToastAlert(text: "Invalid Login Credentials")
+            }
+            print(error)
+            break
+        }
+    }
 }

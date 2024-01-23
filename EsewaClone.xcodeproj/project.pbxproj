@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E107242B2A6324BD003C5E41 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E107242A2A6324BD003C5E41 /* Kingfisher */; };
+		E107242D2A6324EA003C5E41 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E107242C2A6324EA003C5E41 /* UIImageView+Extensions.swift */; };
+		E10724302A63D0B7003C5E41 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E107242F2A63D0B7003C5E41 /* ProfileViewController.swift */; };
 		E123BB432A4E046B00FF7CC1 /* CustomFloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E123BB422A4E046B00FF7CC1 /* CustomFloatingActionButton.swift */; };
 		E130AAEA2A477C60007E7E8C /* StatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E130AAE92A477C60007E7E8C /* StatementViewController.swift */; };
 		E130AAEC2A477C6C007E7E8C /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E130AAEB2A477C6C007E7E8C /* ScanViewController.swift */; };
@@ -38,11 +41,14 @@
 		E1B447212A46FE940089070A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1B447202A46FE940089070A /* Assets.xcassets */; };
 		E1B447242A46FE940089070A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1B447222A46FE940089070A /* LaunchScreen.storyboard */; };
 		E1B4472D2A47140F0089070A /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B4472C2A47140F0089070A /* CustomButton.swift */; };
+		E1C9DA632A59ECF10094808A /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = E1C9DA622A59ECF10094808A /* JWTDecode */; };
 		E1D8F1152A5809FF00D8A239 /* JDStatusBarNotification in Frameworks */ = {isa = PBXBuildFile; productRef = E1D8F1142A5809FF00D8A239 /* JDStatusBarNotification */; };
 		E1D8F11B2A58103A00D8A239 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D8F11A2A58103A00D8A239 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E107242C2A6324EA003C5E41 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		E107242F2A63D0B7003C5E41 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E123BB422A4E046B00FF7CC1 /* CustomFloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFloatingActionButton.swift; sourceTree = "<group>"; };
 		E130AAE92A477C60007E7E8C /* StatementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementViewController.swift; sourceTree = "<group>"; };
 		E130AAEB2A477C6C007E7E8C /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +90,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E107242B2A6324BD003C5E41 /* Kingfisher in Frameworks */,
+				E1C9DA632A59ECF10094808A /* JWTDecode in Frameworks */,
 				E1D8F1152A5809FF00D8A239 /* JDStatusBarNotification in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,6 +99,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E107242E2A63D096003C5E41 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				E107242F2A63D0B7003C5E41 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		E130AAE82A477C43007E7E8C /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +180,7 @@
 		E156DEFD2A534EA500B8E931 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E107242E2A63D096003C5E41 /* Profile */,
 				E1D8F1162A580FA100D8A239 /* Home */,
 				E16E6BBD2A48609E008DDFB8 /* Authentication */,
 			);
@@ -252,6 +269,7 @@
 		E1B447162A46FE920089070A /* EsewaClone */ = {
 			isa = PBXGroup;
 			children = (
+				E1C9DA5E2A59DC4A0094808A /* Extensions */,
 				E16E6BB52A483E9E008DDFB8 /* Model */,
 				E156DEFD2A534EA500B8E931 /* View */,
 				E156DF012A534F4800B8E931 /* ViewModel */,
@@ -281,6 +299,14 @@
 				E123BB422A4E046B00FF7CC1 /* CustomFloatingActionButton.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		E1C9DA5E2A59DC4A0094808A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E107242C2A6324EA003C5E41 /* UIImageView+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		E1D8F1162A580FA100D8A239 /* Home */ = {
@@ -317,6 +343,8 @@
 			name = EsewaClone;
 			packageProductDependencies = (
 				E1D8F1142A5809FF00D8A239 /* JDStatusBarNotification */,
+				E1C9DA622A59ECF10094808A /* JWTDecode */,
+				E107242A2A6324BD003C5E41 /* Kingfisher */,
 			);
 			productName = EsewaClone;
 			productReference = E1B447142A46FE920089070A /* EsewaClone.app */;
@@ -348,6 +376,8 @@
 			mainGroup = E1B4470B2A46FE920089070A;
 			packageReferences = (
 				E1D8F1132A5809FF00D8A239 /* XCRemoteSwiftPackageReference "JDStatusBarNotification" */,
+				E1C9DA612A59ECF10094808A /* XCRemoteSwiftPackageReference "JWTDecode" */,
+				E10724292A6324BD003C5E41 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = E1B447152A46FE920089070A /* Products */;
 			projectDirPath = "";
@@ -376,6 +406,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E107242D2A6324EA003C5E41 /* UIImageView+Extensions.swift in Sources */,
 				E1827B5D2A4C58080047A085 /* CustomHeaderView.swift in Sources */,
 				E156DEF72A53466700B8E931 /* LoginRequest.swift in Sources */,
 				E19E0C312A4A0C12007F68DF /* PrimaryButton.swift in Sources */,
@@ -387,6 +418,7 @@
 				E19E0C2B2A49B4FC007F68DF /* CameraView.swift in Sources */,
 				E156DEF52A53461200B8E931 /* EndPointType.swift in Sources */,
 				E130AAF42A477CD2007E7E8C /* BottomTabViewController.swift in Sources */,
+				E10724302A63D0B7003C5E41 /* ProfileViewController.swift in Sources */,
 				E130AAEC2A477C6C007E7E8C /* ScanViewController.swift in Sources */,
 				E16E6BBA2A483FD0008DDFB8 /* StatementTableViewCell.swift in Sources */,
 				E1B4472D2A47140F0089070A /* CustomButton.swift in Sources */,
@@ -616,6 +648,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E10724292A6324BD003C5E41 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		E1C9DA612A59ECF10094808A /* XCRemoteSwiftPackageReference "JWTDecode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/JWTDecode.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		E1D8F1132A5809FF00D8A239 /* XCRemoteSwiftPackageReference "JDStatusBarNotification" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/calimarkus/JDStatusBarNotification.git";
@@ -627,6 +675,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E107242A2A6324BD003C5E41 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E10724292A6324BD003C5E41 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		E1C9DA622A59ECF10094808A /* JWTDecode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E1C9DA612A59ECF10094808A /* XCRemoteSwiftPackageReference "JWTDecode" */;
+			productName = JWTDecode;
+		};
 		E1D8F1142A5809FF00D8A239 /* JDStatusBarNotification */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E1D8F1132A5809FF00D8A239 /* XCRemoteSwiftPackageReference "JDStatusBarNotification" */;
